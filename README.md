@@ -36,7 +36,8 @@ Open the app, click **Start Dictation**, and your speech is transcribed live int
 | **Readiness probe** | `GET /` on port 80; a Pod only receives traffic once nginx is serving |
 | **SSH tunnel + `kubectl port-forward`** | Delivers the app to the laptop as `http://localhost:8080`, the secure context the browser's microphone API requires |
 
-**Screenshot:** `docs/screenshots/01-ec2-instance.png`
+**Screenshot:** 
+<img width="1919" height="902" alt="01-ec2-instance" src="https://github.com/user-attachments/assets/4acae92e-8075-40a2-92b2-cdc4da3bde84" />
 *The EC2 instance in the AWS console: state Running, instance type `c7i-flex.large`, status checks passed.*
 
 ---
@@ -72,7 +73,8 @@ minikube start --driver=docker --cpus=2 --memory=3000mb
 minikube addons enable metrics-server
 ```
 
-**Screenshot:** `docs/screenshots/02-minikube-start.png`
+**Screenshot:** 
+<img width="1919" height="918" alt="02-minikube-start" src="https://github.com/user-attachments/assets/8a4c15d3-5f51-4822-a417-0f928c6be5c5" />
 *Minikube starting with the Docker driver and configuring the cluster.*
 
 ```bash
@@ -80,7 +82,8 @@ minikube status
 kubectl get nodes -o wide
 ```
 
-**Screenshot:** `docs/screenshots/03-minikube-status.png`
+**Screenshot:** 
+<img width="1919" height="911" alt="03-minikube-status" src="https://github.com/user-attachments/assets/3f4a48cb-11da-49d7-881e-6ecb68e5edfc" />
 *Host, kubelet and API server Running; the single `minikube` node is `Ready`.*
 
 ---
@@ -104,7 +107,8 @@ kubectl get deploy,pods,svc -o wide
 
 This builds the nginx image, loads it into the Minikube node, and creates a Deployment with two replicas plus a NodePort Service in front of them.
 
-**Screenshot:** `docs/screenshots/04-k8s-resources.png`
+**Screenshot:** 
+<img width="1919" height="909" alt="04-k8s-resources" src="https://github.com/user-attachments/assets/7ff357d3-4ed4-4ae4-9599-811d7cd90b38" />
 *The Deployment at 2/2, two Running Pods, and the `voice-notes` NodePort Service.*
 
 ---
@@ -128,7 +132,8 @@ kubectl port-forward svc/voice-notes 8080:80
 ```
 Then browse to `http://localhost:8080`, click **Start Dictation**, allow microphone access, and speak.
 
-**Screenshot:** `docs/screenshots/05-app-dictation.png`
+**Screenshot:**
+<img width="1919" height="961" alt="05-app-dictation" src="https://github.com/user-attachments/assets/4bc337f7-0641-4ea0-96c8-226e32f7824e" />
 *The app at `localhost:8080` with status "Listening..." and live transcribed text in the notes area.*
 
 ---
@@ -144,7 +149,8 @@ kubectl get pods -o wide
 kubectl get events --sort-by=.metadata.creationTimestamp | grep -E "Killing|SuccessfulCreate|Scheduled|Started" | tail -6
 ```
 
-**Screenshot:** `docs/screenshots/06-self-healing.png`
+**Screenshot:** 
+<img width="1919" height="911" alt="06-self-healing" src="https://github.com/user-attachments/assets/f6080bb3-2c13-464a-8acc-aaccf97330ea" />
 *Still 2 Pods after the deletion: one with a new name and an age of a few seconds, plus the events showing the old Pod killed and the new one created.*
 
 Restart the `port-forward` afterwards, since it was attached to the original Pod.
